@@ -16,6 +16,11 @@ class homestate extends State<home>{
 
   int _counter = 0;
   String link = 'd1.png';
+
+
+  String? dropdownValue = null;
+  bool? checkboxValue = false;
+
   void clickme (){
     setState((){
       if (link == 'd1.png'){
@@ -66,8 +71,112 @@ class homestate extends State<home>{
                   ),
                 ),
               ),
+              //create a sized box
+              //create a full login page
 
-              //crud operations on the database
+              Row(
+                children: [
+                  SizedBox(
+
+
+                    child: DropdownButton<String>(
+                      hint: Text('Select a country',
+                        textAlign: TextAlign.center,
+                        ),
+                      value: dropdownValue, alignment: Alignment.center,
+                      icon: Icon(Icons.arrow_downward),
+                      iconSize: 24,
+                      elevation: 16,
+                      style: TextStyle(
+                        color: Colors.deepPurple,
+                        fontSize: 18,
+                      ),
+                      underline: Container(
+                        height: 2,
+                        color: Colors.deepPurpleAccent,
+                      ),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          dropdownValue = newValue;
+                          print('the dropdown value is $dropdownValue');
+                        });
+                      },
+                      items: <String>['France', 'Germany', 'Italy', 'Spain', 'United Kingdom']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                  ),
+                  SizedBox(
+                    //create a checkbox button
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: CheckboxListTile(
+                      title: Text('I agree to the terms and conditions',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                          )),
+                      value: checkboxValue,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          checkboxValue = value;
+                          print('checkbox value: $checkboxValue');
+                        });
+                      },
+                    ),
+
+                  ),
+                ],
+              ),
+              //create an inkwell button
+              InkWell(
+                onTap: () {
+                  print('you tapped me');
+                },
+                child: Container(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+
+
+
+
+              //create a login text field and button
+              Container(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Login',
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                    ),
+                    RaisedButton(
+                      child: Text('Login'),
+                      onPressed: (){},
+                    ),
+                  ],
+                ),
+              ),
 
 
 
