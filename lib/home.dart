@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:slides/slides.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 class home extends StatefulWidget{
   home({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -16,7 +18,7 @@ class homestate extends State<home>{
 
   int _counter = 0;
   String link = 'd1.png';
-
+  var url = 'https://www.instagram.com/riyad_djedda/';
 
   String? dropdownValue = null;
   bool? checkboxValue = false;
@@ -32,6 +34,17 @@ class homestate extends State<home>{
 
     });
   }
+
+  void inkwellpress() async{
+    print ('you pressed me : ' + url);
+
+       await launch(url);
+
+
+
+
+  }
+
 
   void _incrementCounter() {
     setState(() {
@@ -133,9 +146,7 @@ class homestate extends State<home>{
               ),
               //create an inkwell button
               InkWell(
-                onTap: () {
-                  print('you tapped me');
-                },
+                onTap: inkwellpress,
                 child: Container(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.height * 0.1,
